@@ -1,0 +1,50 @@
+ 
+=== 5. Project 2 - USB CDC "Hello from STM32" ===
+**Hardware**: Board + Mini-USB (ST-LINK) + Micro-USB (OTG FS) + Tera Term
+ 
+**Steps**:
+1. New Project → USB_CDC_HelloWorld
+2. CubeMX:
+   - Connectivity → USB_OTG_FS → Device_Only
+   - Middleware → USB_DEVICE → CDC
+3. Generate Code
+4. Add to main.c:
+ 
+```c
+#include "usbd_cdc_if.h"
+#include <string.h>
+ 
+char msg[] = "Hello from STM32 via USB!\r\n";
+ 
+// Inside while(1)
+while (hUsbDeviceFS.dev_state != USBD_STATE_CONFIGURED) {
+    HAL_Delay(10);
+}
+ 
+for(int i=0; i<10; i++) {
+    CDC_Transmit_FS((uint8_t*)msg, strlen(msg));
+    HAL_Delay(1000);
+}
+ 
+// Then blink LD4
+while(1) {
+    HAL_GPIO_TogglePin(GPIOD, LD4_Pin);
+    HAL_Delay(300);
+}
+```
+ 
+5. Build → Flash → Connect Micro-USB → Open Tera Term on correct COM port
+ 
+**Expected**: "Hello from STM32 via USB!" printed 10 times, then LD4 blinks.
+ 
+=== 6. Troubleshooting ===
+- **LEDs not blinking**: Check pins as Output, ST-Link drivers, HAL_Delay
+- **USB CDC issues**:
+  - Connect both cables
+  - Correct COM port
+  - Re-open terminal after flash
+  - Terminal must be open before sending
+  - Handle USBD_BUSY with retries
+ 
+Useful Links:
+- STM32CubeIDE: https://www.st.com/stm32cubeide

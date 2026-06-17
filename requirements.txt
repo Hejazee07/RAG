@@ -1,0 +1,27 @@
+langchain
+langchain-core
+langchain-community
+
+# LLM Providers
+langchain-mistralai
+mistralai
+
+# Vector Database
+chromadb
+
+# Embedding Models
+sentence-transformers
+
+# Other dependencies
+numpy
+
+# API / App Layer (optional but common)
+fastapi
+uvicorn
+
+# UI (optional)
+streamlit
+
+# Utilities
+tqdm
+requests
