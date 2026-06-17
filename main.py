@@ -2,10 +2,11 @@ from dotenv import load_dotenv
 from langchain_mistralai import ChatMistralAI
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 load_dotenv()
 
-data=PyPDFLoader("document loaders/STM32 Training Manual.pdf")
+data=PyPDFLoader("document loaders/Fundamentals.of.Deep.Learning.pdf ")
 docs=data.load()
 
 template=ChatPromptTemplate.from_messages(
@@ -14,8 +15,16 @@ template=ChatPromptTemplate.from_messages(
 
 model=ChatMistralAI(model = "mistral-small-2603")
 
-prompt=template.format_messages(data=docs[0].page_content)
+splitter=RecursiveCharacterTextSplitter(
+    chunk_size=1000,
+    chunk_overlap=200
+)
 
-response=model.invoke(prompt)
+chunks=splitter.split_documents(docs)
 
-print(response.content)
+#prompt=template.format_messages(data=docs[0].page_content)
+
+#response=model.invoke(prompt)
+
+#print(response.content)
+print(chunks)

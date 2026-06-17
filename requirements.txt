@@ -24,4 +24,4 @@ streamlit
 
 # Utilities
 tqdm
-requests
+requests 
