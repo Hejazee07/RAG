@@ -1,27 +1,9 @@
 langchain
-langchain-core
 langchain-community
-
-# LLM Providers
-langchain-mistralai
-mistralai
-
-# Vector Database
+langchain-text-splitters
+langchain-chroma
+langchain-huggingface
 chromadb
-
-# Embedding Models
+pypdf
+python-dotenv
 sentence-transformers
-
-# Other dependencies
-numpy
-
-# API / App Layer (optional but common)
-fastapi
-uvicorn
-
-# UI (optional)
-streamlit
-
-# Utilities
-tqdm
-requests 

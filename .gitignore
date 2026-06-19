@@ -8,13 +8,9 @@ wheels/
 .env
 
 
-# Virtual environments
-.venv
 # Environment variables
 .env
 
-# Virtual environment
-.venv/
 
 # Python cache
 __pycache__/
